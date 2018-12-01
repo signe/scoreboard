@@ -35,6 +35,12 @@ $sb(function() {
 // FIXME - also provide visual feedback that key-control is disabled while typing into input text box?
 	_crgKeyControls.addCondition(function() { return !$("#TeamTime input:text.Editing").length; });
 
+
+	$("<li>").text("Caps Lock is On").attr("id", "capsLockWarning").addClass("Hidden").appendTo("#tabBar");
+	$(document).keydown(function(e) {
+		$("#capsLockWarning").toggleClass("Hidden",
+				e.originalEvent.getModifierState("CapsLock") == (e.originalEvent.key === "CapsLock"));
+	});
 	$("<button>").text("Logout").click(logout).button().css("float", "right").appendTo("#tabBar");
 });
 
